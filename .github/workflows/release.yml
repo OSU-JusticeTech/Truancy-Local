@@ -1,31 +1,44 @@
 name: Build Windows Executable
 
 on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
-
+    
     steps:
       - uses: actions/checkout@v3
-
+      
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
+      
       - name: Install dependencies
         run: pip install pyinstaller
-
+      
       - name: Install requirements
         run: pip install -r requirements.txt
         if: hashFiles('requirements.txt') != ''
-
+      
       - name: Build executable
         run: pyinstaller --onefile --name Truancy-Local main.py
-
+      
       - name: Upload to release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/Truancy-Local.exe
+        if: github.event_name == 'release'
+      
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Truancy-Local-Windows
+          path: dist/Truancy-Local.exe
+        if: github.event_name != 'release'
