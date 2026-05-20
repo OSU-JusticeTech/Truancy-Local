@@ -5,6 +5,7 @@ from PyQt6.QtCore import QSettings
 from pdf_parser import extract_students_from_pdf
 import subprocess
 import os
+from datetime import datetime
 
 
 def select_pdf(window):
@@ -33,6 +34,10 @@ def select_pdf(window):
         students[0].printHeaders()
         for s in students:
             s.print()
+
+    if generated_date is None:
+        now = datetime.now().date()
+        generated_date = (now.month, now.day, now.year)
 
     window.pdf_opened.emit(pdf_path, students, school_name, generated_date)
 
