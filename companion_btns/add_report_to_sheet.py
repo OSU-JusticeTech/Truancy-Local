@@ -269,7 +269,7 @@ def add_student(sheet, student, column, row, suspension_col):
             cell_unex.value = unexcused
 
             # Check for mismatch with report's total and calculated total
-            if excused + unexcused != total_no_suspension:
+            if abs(excused + unexcused - total_no_suspension) > 0.02:
                 print(f"!!! Total hours mismatch for {student.firstName} {student.lastName}"
                       f": Excel says {excused + unexcused}, PDF says {total_no_suspension}")
 
