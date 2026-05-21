@@ -87,7 +87,7 @@ class TruancyWindow(QMainWindow):
         self.add_absences_button.clicked.connect(lambda: add_report_to_sheet(self))
         self.sheets_combo = QComboBox()
         self.date_select = QDateEdit()
-        self.date_select.setMaximumWidth(80)
+        #self.date_select.setMaximumWidth(80)
 
         # Button for DOCX generation
         self.generate_template_button = QPushButton("Generate Letter for Selected Row in Excel")
