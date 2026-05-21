@@ -135,8 +135,8 @@ def add_report_to_sheet(window):
             excel_student_id = sheet.range((row, column_locs["Student #"])).value
             
             # Get names from Excel
-            excel_first_name = sheet.range((row, column_locs["First Name"])).value
-            excel_last_name = sheet.range((row, column_locs["Last Name"])).value
+            excel_first_name = str(sheet.range((row, column_locs["First Name"])).value)
+            excel_last_name = str(sheet.range((row, column_locs["Last Name"])).value)
             
             matched_student = None
             
@@ -186,9 +186,7 @@ def add_report_to_sheet(window):
             while cont:
                 insert_row += 1
                 currname = sheet.range((insert_row, column_locs["Last Name"])).value
-                if isinstance(curname,bool):
-                    currname = ""
-                cont = bool(currname) and student.lastName > currname
+                cont = bool(currname) and student.lastName > str(currname)
 
 
             sheet.range(f"{insert_row}:{insert_row}").insert('down')
