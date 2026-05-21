@@ -197,7 +197,7 @@ def add_report_to_sheet(window):
             try:
                 gradenum = int(student.grade)
                 grade = str(gradenum) + grade_suffix[gradenum]
-            except TypeError:
+            except:
                 grade = student.grade
 
             sheet.range((insert_row, column_locs["Last Name"])).value = student.lastName
