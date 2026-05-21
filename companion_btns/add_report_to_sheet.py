@@ -186,6 +186,8 @@ def add_report_to_sheet(window):
             while cont:
                 insert_row += 1
                 currname = sheet.range((insert_row, column_locs["Last Name"])).value
+                if isinstance(curname,bool):
+                    currname = ""
                 cont = bool(currname) and student.lastName > currname
 
 
