@@ -50,9 +50,9 @@ def extract_students_from_pdf(pdf_path):
                     name_part = parts[0].strip()
                     student_id_part = parts[1].strip()
                     #parse name/id from line
-                    name_split = name_part.split()
-                    current_student.firstName = name_split[0]
-                    current_student.lastName = " ".join(name_split[1:])
+                    name_split = name_part.split(",")
+                    current_student.firstName = name_split[1].strip()
+                    current_student.lastName = name_split[0].strip()
                     current_student.id = student_id_part.split()[0]
 
                 # extract other fields while inside a student block
